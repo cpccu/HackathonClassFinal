@@ -13,21 +13,25 @@ export function useDay(date: Date = new Date()) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
 
+  const uid = user?.uid;
+
   const fetchDay = useCallback(async () => {
-    if (!user) return;
+    if (!uid) return;
     try {
       setLoading(true);
-      const data = await getDay(user.uid, key);
+      const data = await getDay(uid, key);
       setDay(data);
       setError(null);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       setError(err);
     } finally {
       setLoading(false);
     }
-  }, [user, key]);
+  }, [uid, key]);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchDay();
   }, [fetchDay]);
 

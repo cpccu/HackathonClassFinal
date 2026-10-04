@@ -10,21 +10,25 @@ export function useHabits() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
 
+  const uid = user?.uid;
+
   const fetchHabits = useCallback(async () => {
-    if (!user) return;
+    if (!uid) return;
     try {
       setLoading(true);
-      const data = await listHabits(user.uid);
+      const data = await listHabits(uid);
       setHabits(data);
       setError(null);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       setError(err);
     } finally {
       setLoading(false);
     }
-  }, [user]);
+  }, [uid]);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchHabits();
   }, [fetchHabits]);
 

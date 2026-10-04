@@ -44,8 +44,8 @@ export function HabitForm({ initial, onSubmit, onCancel }: Props) {
         days,
         ...(kind === "scheduled" ? { time } : {}),
       });
-    } catch (err: any) {
-      setError(err.message || "Failed to save habit");
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "Failed to save habit");
     } finally {
       setIsSubmitting(false);
     }

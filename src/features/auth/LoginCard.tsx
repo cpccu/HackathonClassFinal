@@ -11,6 +11,7 @@ export function LoginCard() {
     setLoading(true);
     try {
       await signInWithGoogle();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       if (error?.code === "auth/popup-closed-by-user") {
         // do nothing

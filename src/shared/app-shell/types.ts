@@ -9,7 +9,7 @@ export type NavItem = {
 export type TodayWidget = {
   id: string;
   order: number;
-  Component: ComponentType<any>;
+  Component: ComponentType<unknown>;
 };
 
 export type FeatureManifest = {

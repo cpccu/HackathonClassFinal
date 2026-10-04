@@ -10,8 +10,10 @@ export function HeatmapWidget() {
   const { habits, loading: habitsLoading } = useHabits();
   const [selectedHabitId, setSelectedHabitId] = useState<string>("all");
 
-  const today = new Date();
-  const startDate = addDays(today, -16 * 7);
+  const { today, startDate } = useMemo(() => {
+    const t = new Date();
+    return { today: t, startDate: addDays(t, -16 * 7) };
+  }, []);
 
   const gridData = useMemo(() => {
     // Transform data based on selection
