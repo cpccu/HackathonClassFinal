@@ -23,12 +23,20 @@ export function TodayChecklist() {
       day.totalCount > 0 &&
       day.doneCount === day.totalCount
     ) {
-      confetti({
-        particleCount: 150,
-        spread: 90,
-        origin: { y: 0.1 },
-        colors: ['#0F766E', '#2C9B90', '#39d353', '#f85149', '#FFFFFF']
-      });
+      const colors = ['#0F766E', '#2C9B90', '#39d353', '#f85149', '#FFFFFF'];
+      const triggerConfetti = (x: number) => {
+        confetti({
+          particleCount: 120,
+          spread: 80,
+          origin: { y: 0.1, x },
+          colors
+        });
+      };
+      
+      // Three explosions from different horizontal positions
+      triggerConfetti(0.5); // Center
+      setTimeout(() => triggerConfetti(0.2), 400); // Left
+      setTimeout(() => triggerConfetti(0.8), 800); // Right
     }
     prevDoneCountRef.current = day.doneCount;
   }, [day.doneCount, day.totalCount]);
