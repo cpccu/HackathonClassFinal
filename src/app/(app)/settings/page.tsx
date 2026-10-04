@@ -1,5 +1,4 @@
 "use client";
-import Link from "next/link";
 import { HabitList } from "@/features/habits";
 import { useAuth, signOutUser } from "@/features/auth";
 
@@ -8,12 +7,7 @@ export default function SettingsPage() {
 
   return (
     <main className="flex flex-col flex-1 p-4 md:p-8 max-w-4xl mx-auto w-full">
-      <div className="flex items-center justify-between mb-8">
-        <h1 className="text-3xl font-bold">Settings</h1>
-        <Link href="/today" className="text-[var(--accent)] hover:underline font-medium">
-          ← Back to Today
-        </Link>
-      </div>
+      <h1 className="text-3xl font-bold mb-8">Settings</h1>
       
       <section className="mb-12">
         <h2 className="text-xl font-bold mb-4">Account</h2>
