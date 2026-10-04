@@ -1,6 +1,7 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import confetti from "canvas-confetti";
 import { useHabits } from "@/features/habits";
 import { useDay } from "./useDay";
 import { addDays } from "@/shared/lib/date";
@@ -11,6 +12,26 @@ export function TodayChecklist() {
   
   const { habits, loading: habitsLoading } = useHabits();
   const { day, loading: dayLoading, updateStatus } = useDay(activeDate);
+
+  const prevDoneCountRef = useRef(day.doneCount);
+  
+  useEffect(() => {
+    // Check if the doneCount increased and reached the total count
+    if (
+      prevDoneCountRef.current !== undefined &&
+      day.doneCount > prevDoneCountRef.current &&
+      day.totalCount > 0 &&
+      day.doneCount === day.totalCount
+    ) {
+      confetti({
+        particleCount: 150,
+        spread: 90,
+        origin: { y: 0.1 },
+        colors: ['#0F766E', '#2C9B90', '#39d353', '#f85149', '#FFFFFF']
+      });
+    }
+    prevDoneCountRef.current = day.doneCount;
+  }, [day.doneCount, day.totalCount]);
 
   // Allow up to 7 days in the past
   const goBack = () => {
