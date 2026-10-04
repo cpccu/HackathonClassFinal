@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { features } from "@/registry";
+import { ThemeToggle } from "@/shared/components/ThemeToggle";
 import type { ReactNode } from "react";
 
 export function AppShell({ children }: { children: ReactNode }) {
@@ -38,12 +39,24 @@ export function AppShell({ children }: { children: ReactNode }) {
             );
           })}
         </nav>
+        <div className="p-4 border-t border-[var(--skipped)] flex items-center justify-between">
+          <span className="text-sm font-medium text-[var(--muted)]">Theme</span>
+          <ThemeToggle />
+        </div>
       </aside>
 
       {/* Main Content Area */}
-      <main className="flex-1 overflow-y-auto overflow-x-hidden pb-20 md:pb-0">
-        {children}
-      </main>
+      <div className="flex-1 flex flex-col h-full overflow-hidden">
+        {/* Mobile Header */}
+        <header className="md:hidden flex items-center justify-between p-4 border-b border-[var(--skipped)] bg-[var(--surface)]">
+          <h1 className="text-lg font-bold text-[var(--ink)]">Habit Tracker</h1>
+          <ThemeToggle />
+        </header>
+
+        <main className="flex-1 overflow-y-auto overflow-x-hidden pb-20 md:pb-0 relative">
+          {children}
+        </main>
+      </div>
 
       {/* Mobile Bottom Nav */}
       <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-[var(--surface)] border-t border-[var(--skipped)] flex justify-around p-2 z-50">

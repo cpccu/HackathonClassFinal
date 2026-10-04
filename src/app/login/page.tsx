@@ -2,6 +2,7 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth, LoginCard } from "@/features/auth";
+import { ThemeToggle } from "@/shared/components/ThemeToggle";
 
 export default function LoginPage() {
   const { status } = useAuth();
@@ -22,7 +23,10 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="flex flex-col flex-1 items-center justify-center p-4 bg-[var(--bg)] min-h-screen">
+    <main className="flex flex-col flex-1 items-center justify-center p-4 bg-[var(--bg)] min-h-screen relative">
+      <div className="absolute top-4 right-4">
+        <ThemeToggle />
+      </div>
       <LoginCard />
     </main>
   );
